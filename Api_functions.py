@@ -13,7 +13,7 @@ def make_tmdb_api_request(method, apiKey, extra_params=None):
     extra_params = extra_params or {}
     url = 'https://api.themoviedb.org/3%s' % method
     params = {
-        'apiKey': apiKey,
+        'api_key': apiKey,
         'language': 'en_US',
     }
     params.update(extra_params)
