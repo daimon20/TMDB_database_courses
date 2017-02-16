@@ -1,6 +1,7 @@
 import urllib.request
 import urllib.parse
 import json
+import FilmsComparerFunctions
 
 
 def load_json_data_from_url(base_url, url_params):
@@ -31,5 +32,11 @@ def getMovie(movieId, apiKey=''):
     return movie
 
 
-
-
+def getIndexOfFilmsSimmilarity(movie, chosenMovie):
+    index=0
+    index+=FilmsComparerFunctions.numComperor(movie["popularity"], chosenMovie["popularity"])*0.2
+    index+=FilmsComparerFunctions.numComperor(movie["vote_average"], chosenMovie["vote_average"])*0.2
+    movieGenres=set([s["id"] for s in movie["genres"]])
+    chosenMovieGenres=set([g["id"] for g in chosenMovie["genres"]])
+    index+=FilmsComparerFunctions.collectionComperor(movieGenres, chosenMovieGenres)*0.6
+    return index
